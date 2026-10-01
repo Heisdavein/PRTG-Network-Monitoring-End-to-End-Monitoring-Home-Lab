@@ -116,7 +116,7 @@ Rather than simply reading about these technologies, I built and tested them ins
 
 The project therefore followed the principle:
 
-```text
+
 Deploy
    ↓
 Secure
@@ -466,7 +466,8 @@ It is much harder to create alerts that people actually pay attention to.
 If every tiny fluctuation generates a warning, administrators eventually stop reading them. 
 When that happens, the truly important alert can easily be missed. 
 I would much rather receive ten meaningful alerts than one thousand unnecessary ones. 
-Effective monitoring is about quality, not quantity. 
+Effective monitoring is about quality, not quantity.
+
 Step 6 Learning My Way Around the Interface 
 Before adding any devices, I spent several minutes simply exploring the PRTG interface. 
 Understanding where information lives is almost as important as understanding the sensors themselves. 
@@ -2817,7 +2818,8 @@ Perhaps the most important lesson was recognising that a monitoring solution is 
 network outage, visibility into every other system is lost at exactly the moment it is needed most. By combining regular configuration backups, full 
 virtual machine backups, and routine restore testing, I can ensure that the monitoring environment remains as resilient as the infrastructure it is 
 designed to protect.
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/a488281a-cec1-47fc-9881-7dcdc57dd828" />
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/4ee7f85a-352b-4675-ba0c-7d7b21d17eac" />
+
 
 
 
