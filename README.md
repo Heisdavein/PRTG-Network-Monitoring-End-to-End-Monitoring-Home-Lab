@@ -1,5 +1,5 @@
 # PRTG Network Monitoring Home Lab
-Full Documentation Attached as PDF
+
 ## End-to-End Installation, Configuration & Monitoring
 
 A hands-on infrastructure monitoring home lab documenting the deployment of **PRTG Network Monitor** on a Windows Server 2022 virtual machine running inside VMware Workstation.
