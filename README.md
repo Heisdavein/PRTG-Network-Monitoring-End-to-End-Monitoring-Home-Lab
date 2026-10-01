@@ -250,7 +250,7 @@ PRTG Core Server Service
 This is the main service that powers PRTG. It manages the web interface, stores monitoring data, processes alerts, generates reports, schedules 
 sensor scans, and coordinates communication between all connected probes. 
 PRTG Probe Service 
-Page 3 of 52 
+
 PRTG Network Monitoring  |  Home Lab Project Documentation 
 The Probe Service performs the actual monitoring work. It polls devices, collects performance data from sensors, executes monitoring protocols 
 such as SNMP and WMI, and sends the collected information back to the Core Server for processing and display. 
@@ -363,7 +363,7 @@ Once I confirmed the new password and clicked Save, the warning banner immediate
 That simple change significantly improved the security of the monitoring platform. 
 Why This Matters 
 One best practice I've noticed throughout enterprise environments is the use of named administrator accounts instead of shared credentials. 
-Page 6 of 52 
+
 PRTG Network Monitoring  |  Home Lab Project Documentation 
 Rather than everyone logging in as Administrator, each engineer receives their own account. 
 This provides several important advantages: 
@@ -440,7 +440,7 @@ For critical infrastructure such as:
 domain controllers, 
 • 
 firewalls, 
-Page 7 of 52 
+
 PRTG Network Monitoring  |  Home Lab Project Documentation 
 • 
 Internet gateways, 
@@ -525,7 +525,7 @@ the Windows operating system,
 installed applications, 
 • 
 system files, 
-Page 8 of 52 
+
 PRTG Network Monitoring  |  Home Lab Project Documentation 
 • 
 registry, 
@@ -535,6 +535,7 @@ Both forms of backup are necessary.
 Neither replaces the other. 
 That was an important lesson for me because true disaster recovery depends on protecting both the application and the platform it runs on.
 <img width="1402" height="1122" alt="image" src="https://github.com/user-attachments/assets/5067437c-37ec-4891-99cb-70b8e306c855" />
+
 Section 3: Organising Devices with Groups
 Before adding my first monitored device, I took a step back to think about how I wanted to organise my monitoring environment. It can be tempting to immediately start adding switches, servers, firewalls, and storage devices as soon as PRTG is installed, especially because the software makes it so easy. However, I quickly realised that spending a few extra minutes planning the structure at the beginning would save me a great deal of time later.
 One thing I appreciate about PRTG is that it organises everything using a clear hierarchy:
@@ -673,6 +674,7 @@ Before working with PRTG, I assumed groups were simply folders used to keep the 
 Groups are the foundation upon which the entire monitoring platform is built.
 A well-designed group structure improves navigation, reduces configuration time through inheritance, simplifies future expansion, and makes troubleshooting significantly easier during an outage.
 Taking the time to organise devices before adding them may not feel like the most exciting part of setting up a monitoring system, but I found it to be one of the smartest investments I could make. As my monitoring environment continues to grow, this structure will allow me to manage it efficiently without constantly reorganising devices or duplicating configuration work.
+
 Section 4: Monitoring a Cisco Switch with SNMP Version 2 
 Adding my Cisco switch was the first time I connected a real network device to PRTG, and it marked an important milestone in building my 
 monitoring environment. Up until this point, I had focused on installing, securing, and organising the monitoring platform itself. Now it was time to 
@@ -998,8 +1000,6 @@ danmilltraining
 Click Apply. 
 The community string must exactly match the value that PRTG will later use when polling the device. Even a single incorrect character would cause 
 every SNMP request to fail. 
-�
-�
 Reflection 
 One thing I noticed is how much simpler Synology makes SNMP configuration compared to traditional networking equipment. On Cisco devices I 
 had to configure everything through IOS commands, whereas Synology exposes the same functionality through a graphical interface. 
@@ -1198,6 +1198,7 @@ Perhaps the biggest lesson I took away from this section was the value of histor
 performing right now, but looking at its graphs over days or weeks tells me whether it's getting healthier or slowly drifting towards failure. That 
 ability to spot trends before users are affected is what transforms monitoring from a reactive tool into a proactive operational strategy.
 <img width="1402" height="1122" alt="image" src="https://github.com/user-attachments/assets/d6f7ae10-bdb7-4661-9858-00cacc21487e" />
+
 Section 6: Monitoring a Firewall with SNMP Version 3
 Up to this point in my lab, every device I monitored had used SNMP version 2c. It worked well, was simple to configure, and was perfectly 
 adequate for a home lab. However, I knew that if I were monitoring a production firewall—the device responsible for protecting an organisation's 
@@ -1277,14 +1278,12 @@ After creating the user, I configured SNMP traps.
 Rather than waiting for PRTG to poll every sixty seconds, traps allow the firewall to proactively send important events to the monitoring server the 
 moment they occur. 
 I configured the trap destination as the IP address of my PRTG server before saving the configuration. 
-�
-�
 Reflection 
 Although the interface varies between vendors like Cisco, Palo Alto, Fortinet and WatchGuard, the underlying concepts remain almost identical. 
 Every platform asks for: 
 • 
 an SNMP username 
-Page 25 of 52 
+ 
 PRTG Network Monitoring  |  Home Lab Project Documentation 
 • 
 an authentication protocol 
@@ -1372,7 +1371,7 @@ Each interface displayed separate graphs for:
 inbound bandwidth 
 • 
 outbound bandwidth 
-Page 26 of 52 
+
 PRTG Network Monitoring  |  Home Lab Project Documentation 
 • 
 utilisation over time 
@@ -1448,6 +1447,7 @@ Finally, configuring credentials at the group level demonstrated how thoughtful 
 environments grow from a handful of devices to hundreds or even thousands, small design decisions like credential inheritance become significant 
 time savers and help maintain consistency across the entire monitoring platform.
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/22997a65-104c-4230-8957-0d7e3205ef8a" />
+
 Section 7: NetFlow Traffic Analysis
 After configuring SNMP monitoring, I realised there was still one important question I couldn't answer. 
 PRTG could tell me whether a device was online. 
@@ -1675,7 +1675,7 @@ For that reason, flow exports should remain on trusted internal networks and sho
 additional protection. 
 Review trends regularly. 
 NetFlow is most valuable when used proactively. 
-Page 31 of 52 
+
 PRTG Network Monitoring  |  Home Lab Project Documentation 
 Rather than waiting for performance complaints, reviewing Top Talkers and protocol distributions each week helps establish a baseline of normal 
 behaviour. 
@@ -2690,7 +2690,7 @@ current status
 Engineers can then: 
 • 
 acknowledge the issue 
-Page 48 of 52 
+2 
 PRTG Network Monitoring  |  Home Lab Project Documentation 
 • 
 add notes 
