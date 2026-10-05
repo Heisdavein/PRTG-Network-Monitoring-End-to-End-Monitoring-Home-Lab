@@ -90,8 +90,6 @@ Before beginning the lab I ensured I had the following:
 > [!TIP]
 > Running PRTG, a Domain Controller, and other VMs on an 8 GB host is tight. Allocate memory carefully and avoid running VMs you are not actively using.
 
-https://chatgpt.com/backend-api/estuary/content?id=file_00000000d13c82469ebead6561ac635b&ts=497565&p=fs&cid=1&sig=70fd3abb09ca55b845bc499ba2c773e7524eb0f285e3a368b0a6662fd73c7a1e&v=0
-
 📸 **SCREENSHOT PLACEHOLDER**
 `screenshots/01-02-prtg-vm-static-ip.png`
 > Capture: output of `ipconfig /all` on the PRTG VM, showing the static IPv4 address, subnet mask, gateway, and DNS server.
