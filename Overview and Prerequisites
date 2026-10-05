@@ -1,0 +1,101 @@
+# 01. Overview and Prerequisites
+
+[← Back to README](../README.md) · [Next: Installation →](02-installation.md)
+
+---
+
+## Introduction
+
+Before I started this lab I understood that network monitoring was important, but I had not fully appreciated *why* until I imagined a realistic scenario. It is 2:00 a.m., a critical server has silently gone offline, and the first indication of a problem is an angry customer who cannot access a service. The outage has already affected the business, and the IT team is reacting instead of preventing the problem. An effective monitoring solution is designed to avoid exactly this.
+
+As I learned more about enterprise networking, I realised that monitoring is not simply about displaying graphs or collecting statistics. It provides continuous visibility into the health, performance, and availability of network devices and servers. More importantly, it alerts administrators when something begins to fail, so issues can be investigated and resolved before users are affected.
+
+### Why PRTG Network Monitor
+
+I chose **PRTG Network Monitor**, developed by Paessler AG, for these reasons:
+
+- It is one of the most widely used infrastructure monitoring platforms in the industry and combines enterprise-level capability with a relatively straightforward deployment.
+- It supports a wide range of monitoring technologies: SNMP, WMI, NetFlow, packet sniffing, SSH, HTTP, VMware, Hyper-V, Active Directory, SQL databases, cloud services, and more.
+- The **free edition supports up to 100 sensors**, which is enough to build a realistic monitoring environment while learning the platform.
+- It lets me practise many of the same techniques used in production enterprise networks.
+
+### Scope of this lab
+
+I documented every stage of the deployment as I completed it. I installed PRTG on a Windows Server virtual machine in VMware Workstation, secured the installation, and then configured monitoring for four types of infrastructure:
+
+- a Cisco Catalyst switch
+- a Synology NAS
+- a WatchGuard firewall
+- a Windows Server (Domain Controller)
+
+Along the way I worked with SNMP versions 2c and 3, WMI, LDAP, and NetFlow. All work was done on a personal computer with an Intel Core i5, 8 GB of RAM, a 256 GB SSD, Windows 11, VMware Workstation, and Windows Server 2022. No enterprise hardware was required beyond the virtual infrastructure and the devices being monitored.
+
+By the end I had a functioning monitoring environment capable of tracking network performance, server health, storage utilisation, authentication services, and traffic flows in real time.
+
+---
+
+## What I Built
+
+| # | Deliverable | Document |
+|---|---|---|
+| 1 | PRTG Network Monitor on a Windows Server 2022 VM in VMware Workstation | [02](02-installation.md) |
+| 2 | Hardening: changed default credentials, enabled HTTPS, configured notification templates | [03](03-initial-setup-and-hardening.md) |
+| 3 | Group hierarchy designed around inheritance | [04](04-organising-devices-with-groups.md) |
+| 4 | Cisco Catalyst switch monitored with SNMP v2c | [05](05-cisco-switch-snmpv2.md) |
+| 5 | Synology NAS monitored with SNMP and manually configured sensors (disk, memory, system health, storage capacity) | [06](06-synology-nas-manual-sensors.md) |
+| 6 | WatchGuard firewall monitored with SNMP v3 (authenticated and encrypted) | [07](07-watchguard-firewall-snmpv3.md) |
+| 7 | NetFlow traffic analysis from the WatchGuard firewall into PRTG | [08](08-netflow-traffic-analysis.md) |
+| 8 | Windows Server monitored with both WMI and SNMP | [09](09-windows-server-wmi-snmp.md) |
+| 9 | Active Directory monitoring with LDAP sensors | [10](10-windows-roles-and-services.md) |
+| 10 | Device grouping, sensor priorities, notifications, maps, reports, ticketing, and configuration backup | [03](03-initial-setup-and-hardening.md), [07](07-watchguard-firewall-snmpv3.md), [11](11-maps-reports-ticketing-backup.md) |
+
+---
+
+## Understanding the 100-Sensor Limit
+
+One of the first things I needed to understand was how PRTG's licensing model works. I initially assumed the free edition allowed monitoring of up to 100 *devices*. In reality **the limit is based on sensors, not devices**.
+
+A **sensor** is a single monitoring metric on a device. If I monitor a server's CPU usage, memory utilisation, disk capacity, network traffic, and uptime, I am already using **five sensors** for that single server.
+
+The same principle applies to network equipment. If I monitor every interface on a 48-port switch individually, I could consume more than half of the available sensors on that one device.
+
+| Scenario | Sensors consumed |
+|---|---|
+| Server: CPU, memory, disk capacity, network traffic, uptime | 5 |
+| 48-port switch with one traffic sensor per port | 48 (before CPU, memory, ping, uptime) |
+
+> [!NOTE]
+> Understanding this distinction changed how I planned the lab. Instead of accepting every sensor that auto-discovery proposed, I chose the most valuable sensors for each device. For example, I deleted low-value Disk Free sensors for static system partitions on the firewall ([Document 07](07-watchguard-firewall-snmpv3.md#step-5-review-the-sensors)).
+
+> [!IMPORTANT]
+> **Production recommendation:** In a commercial deployment, sensor count drives licensing cost. Defining a standard "sensor set" per device type (for example, ping, CPU, memory, uptime, and uplink traffic for every switch) keeps both cost and alert noise under control.
+
+---
+
+## Prerequisites
+
+Before beginning the lab I ensured I had the following:
+
+| # | Requirement |
+|---|---|
+| 1 | A computer running Windows 11 with at least an Intel Core i5 processor, 8 GB of RAM, and 256 GB of storage |
+| 2 | VMware Workstation installed and functioning correctly |
+| 3 | A Windows Server 2022 (or Windows Server 2025) virtual machine configured with a **static IP address** |
+| 4 | Access to the official Paessler website to download the latest version of PRTG Network Monitor |
+| 5 | At least one network device to monitor, such as a Cisco switch, Synology NAS, WatchGuard firewall, Windows Server, or another SNMP-enabled device |
+
+> [!NOTE]
+> A static IP address on the PRTG server matters because monitored devices are configured with the PRTG server's address for SNMP access restrictions, trap destinations, and NetFlow export. If the address changed, every one of those settings would break.
+
+> [!TIP]
+> Running PRTG, a Domain Controller, and other VMs on an 8 GB host is tight. Allocate memory carefully and avoid running VMs you are not actively using.
+
+https://chatgpt.com/backend-api/estuary/content?id=file_00000000d13c82469ebead6561ac635b&ts=497565&p=fs&cid=1&sig=70fd3abb09ca55b845bc499ba2c773e7524eb0f285e3a368b0a6662fd73c7a1e&v=0
+
+📸 **SCREENSHOT PLACEHOLDER**
+`screenshots/01-02-prtg-vm-static-ip.png`
+> Capture: output of `ipconfig /all` on the PRTG VM, showing the static IPv4 address, subnet mask, gateway, and DNS server.
+
+---
+
+[← Back to README](../README.md) · [Next: Installation →](02-installation.md)
